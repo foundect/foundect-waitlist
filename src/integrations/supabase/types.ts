@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      early_access_waitlist: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          ip_address: string | null
+          notes: string | null
+          phone_number: string
+          referrer_url: string | null
+          source: string | null
+          status: Database["public"]["Enums"]["waitlist_status"]
+          user_agent: string | null
+          user_type: Database["public"]["Enums"]["waitlist_user_type"]
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          ip_address?: string | null
+          notes?: string | null
+          phone_number: string
+          referrer_url?: string | null
+          source?: string | null
+          status?: Database["public"]["Enums"]["waitlist_status"]
+          user_agent?: string | null
+          user_type: Database["public"]["Enums"]["waitlist_user_type"]
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          ip_address?: string | null
+          notes?: string | null
+          phone_number?: string
+          referrer_url?: string | null
+          source?: string | null
+          status?: Database["public"]["Enums"]["waitlist_status"]
+          user_agent?: string | null
+          user_type?: Database["public"]["Enums"]["waitlist_user_type"]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +67,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      waitlist_status: "pending" | "contacted" | "converted" | "archived"
+      waitlist_user_type: "investor" | "business"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +195,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      waitlist_status: ["pending", "contacted", "converted", "archived"],
+      waitlist_user_type: ["investor", "business"],
+    },
   },
 } as const

@@ -9,9 +9,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const WaitlistForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -19,7 +22,7 @@ const WaitlistForm = () => {
     userType: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.fullName || !formData.email || !formData.phone || !formData.userType) {
@@ -27,10 +30,45 @@ const WaitlistForm = () => {
       return;
     }
 
-    // Here you would typically send to a backend
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    toast.success("Successfully joined the waitlist!");
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase
+        .from('early_access_waitlist')
+        .insert({
+          full_name: formData.fullName.trim(),
+          email: formData.email.toLowerCase().trim(),
+          phone_number: formData.phone.trim(),
+          user_type: formData.userType as 'investor' | 'business',
+          user_agent: navigator.userAgent,
+          referrer_url: document.referrer || null,
+        });
+
+      if (error) {
+        // Check for duplicate email error
+        if (error.code === '23505' || error.message.includes('duplicate')) {
+          setIsDuplicate(true);
+          setIsSubmitted(true);
+          return;
+        }
+        throw error;
+      }
+
+      setIsSubmitted(true);
+      toast.success("Successfully joined the waitlist!");
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
@@ -43,10 +81,21 @@ const WaitlistForm = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-3">Thank You!</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Thank you for joining Foundect's early access waitlist. We'll be in touch as we approach launch.
-            </p>
+            {isDuplicate ? (
+              <>
+                <h3 className="text-xl font-semibold mb-3">You're Already on the List!</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  You're already on the Foundect early access list. We'll notify you as we approach launch.
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-xl font-semibold mb-3">You're on the List</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  We'll notify you as Foundect prepares for launch.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -72,6 +121,7 @@ const WaitlistForm = () => {
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 className="h-12 md:h-11"
+                disabled={isLoading}
               />
             </div>
 
@@ -84,6 +134,7 @@ const WaitlistForm = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="h-12 md:h-11"
+                disabled={isLoading}
               />
             </div>
 
@@ -96,17 +147,21 @@ const WaitlistForm = () => {
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 className="h-12 md:h-11"
+                disabled={isLoading}
               />
             </div>
 
             <div>
               <Label htmlFor="userType" className="text-sm font-medium mb-1.5 block">User Type *</Label>
-              <Select onValueChange={(value) => setFormData({ ...formData, userType: value })}>
+              <Select 
+                onValueChange={(value) => setFormData({ ...formData, userType: value })}
+                disabled={isLoading}
+              >
                 <SelectTrigger className="h-12 md:h-11 bg-background">
                   <SelectValue placeholder="Select your user type" />
                 </SelectTrigger>
                 <SelectContent className="bg-background border-border">
-                  <SelectItem value="individual">Individual Investor — Invest in various promising opportunities</SelectItem>
+                  <SelectItem value="investor">Individual Investor — Invest in various promising opportunities</SelectItem>
                   <SelectItem value="business">Business — Raise funds for your business alongside investing in other prospects</SelectItem>
                 </SelectContent>
               </Select>
@@ -114,9 +169,10 @@ const WaitlistForm = () => {
 
             <button
               type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3.5 rounded-lg text-sm transition-all duration-300 mt-2"
+              disabled={isLoading}
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3.5 rounded-lg text-sm transition-all duration-300 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Request Early Access
+              {isLoading ? "Submitting..." : "Request Early Access"}
             </button>
           </div>
         </form>
