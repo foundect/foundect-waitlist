@@ -1,4 +1,4 @@
-import foundectLogo from "@/assets/foundect-logo.png";
+import foundectLogo from "@/assets/foundect-logo-new.png";
 
 const Hero = () => {
   return (
