@@ -7,7 +7,7 @@ const Hero = () => {
         <img 
           src={foundectLogo} 
           alt="Foundect" 
-          className="h-10 md:h-14 mx-auto mb-6 md:mb-8 animate-fade-in"
+          className="h-14 md:h-20 lg:h-24 mx-auto mb-8 md:mb-10 animate-fade-in"
         />
         
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 animate-fade-in" style={{ animationDelay: "0.1s" }}>
