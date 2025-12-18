@@ -157,20 +157,27 @@ const WaitlistForm = () => {
                 onValueChange={(value) => setFormData({ ...formData, userType: value })}
                 disabled={isLoading}
               >
-                <SelectTrigger className="h-12 md:h-11 bg-background">
+                <SelectTrigger className="h-12 md:h-11 bg-background w-full">
                   <SelectValue placeholder="Select your user type" />
                 </SelectTrigger>
-                <SelectContent className="bg-background border-border">
-                  <SelectItem value="investor">Individual Investor — Invest in various promising opportunities</SelectItem>
-                  <SelectItem value="business">Business — Raise funds for your business alongside investing in other prospects</SelectItem>
+                <SelectContent className="bg-background border-border max-w-[calc(100vw-3rem)]">
+                  <SelectItem value="investor">Individual Investor</SelectItem>
+                  <SelectItem value="business">Business</SelectItem>
                 </SelectContent>
               </Select>
+              {formData.userType && (
+                <p className="text-xs text-muted-foreground mt-1.5">
+                  {formData.userType === "investor" 
+                    ? "Invest in curated, Shari'ah-aligned opportunities."
+                    : "Raise ethical capital and invest in others."}
+                </p>
+              )}
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3.5 rounded-lg text-sm transition-all duration-300 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground font-semibold py-3.5 rounded-xl text-sm transition-all duration-200 mt-4 shadow-md hover:shadow-lg active:shadow-sm active:translate-y-px disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
             >
               {isLoading ? "Submitting..." : "Request Early Access"}
             </button>
