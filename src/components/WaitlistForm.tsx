@@ -37,6 +37,14 @@ const WaitlistForm = () => {
       return;
     }
 
+    // Phone number validation - E.164 format
+    const cleanPhone = formData.phone.replace(/[\s\-()]/g, '');
+    const phoneRegex = /^\+?[1-9]\d{6,14}$/;
+    if (!phoneRegex.test(cleanPhone)) {
+      toast.error("Please enter a valid phone number");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -45,7 +53,7 @@ const WaitlistForm = () => {
         .insert({
           full_name: formData.fullName.trim(),
           email: formData.email.toLowerCase().trim(),
-          phone_number: formData.phone.trim(),
+          phone_number: formData.phone.trim().replace(/[^+0-9]/g, ''),
           user_type: formData.userType as 'investor' | 'business',
           user_agent: navigator.userAgent,
           referrer_url: document.referrer || null,
@@ -64,7 +72,10 @@ const WaitlistForm = () => {
       setIsSubmitted(true);
       toast.success("Successfully joined the waitlist!");
     } catch (error) {
-      console.error("Submission error:", error);
+      // Only log detailed errors in development to prevent info leakage
+      if (import.meta.env.DEV) {
+        console.error("Submission error:", error);
+      }
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
