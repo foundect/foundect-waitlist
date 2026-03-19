@@ -5,15 +5,15 @@ const team = [
     name: "Iftekhar Zarif",
     role: "Founder & CEO",
     email: "zarif@foundect.com",
-    bio: "Zarif leads Foundect's vision, product strategy, and long-term roadmap. He focuses on defining how AI, ethical finance, and modern digital platforms can converge to create a scalable, trust-driven investment ecosystem.",
-    details: "His role centers on platform architecture, user experience design, market positioning, and governance philosophy, ensuring that Foundect is built as a sustainable infrastructure rather than a short-term financial product. Zarif oversees strategic direction, partnerships, and brand narrative while maintaining strong emphasis on credibility, ethics, and institutional readiness.",
+    bio: "Zarif leads Foundect's product strategy, platform architecture, and long-term vision. His focus is building a credible, governance-driven investment infrastructure for Bangladesh's SME market.",
+    details: "",
   },
   {
     name: "Rahul Sinha",
     role: "Co-Founder & COO",
     email: "rahul@foundect.com",
-    bio: "Rahul oversees Foundect's operations, internal systems, and execution strategy. He focuses on building structured workflows, operational clarity, and scalable processes that support long-term growth.",
-    details: "He contributes financial insights, accounting oversight, and internal financial modeling, supporting informed decision-making without directly handling user funds. His work ensures operational discipline, risk awareness, and alignment with future regulatory and institutional partners.",
+    bio: "Rahul oversees Foundect's operations, financial structuring, and execution strategy. He ensures operational discipline and alignment with regulatory and institutional standards.",
+    details: "",
   },
 ];
 
