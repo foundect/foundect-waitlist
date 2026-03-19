@@ -11,11 +11,11 @@ const Hero = () => {
         />
         
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          The Future of Ethical Investing in Bangladesh
+          Structured Capital Infrastructure for Bangladesh's SMEs
         </h1>
         
         <p className="text-base md:text-lg text-muted-foreground mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          An AI-powered, Shari'ah-aligned investment platform using data intelligence, gamification, and modern digital infrastructure to connect ethical investors with real businesses.
+          Foundect provides a governed environment where verified businesses present structured investment opportunities and investors participate under clear Shari'ah-compliant conditions.
         </p>
       </div>
     </section>

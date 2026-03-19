@@ -39,11 +39,8 @@ const TeamSection = () => {
                 <p className="text-accent font-medium text-xs">{member.role}</p>
               </div>
 
-              <p className="text-muted-foreground text-xs leading-relaxed mb-2">
-                {member.bio}
-              </p>
               <p className="text-muted-foreground text-xs leading-relaxed mb-4">
-                {member.details}
+                {member.bio}
               </p>
 
               <a 

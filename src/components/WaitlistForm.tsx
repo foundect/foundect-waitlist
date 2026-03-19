@@ -118,7 +118,8 @@ const WaitlistForm = () => {
       <div className="container max-w-lg mx-auto">
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold mb-2">Request Early Access</h2>
-          <p className="text-muted-foreground text-sm">Be among the first to experience ethical investing, reimagined.</p>
+          <p className="text-muted-foreground text-sm">Foundect is opening early access to investors and businesses. Join the waitlist to be notified when the platform launches.</p>
+          <p className="text-sm mt-3" style={{ color: '#6B7A99' }}>Followed by 500+ professionals on LinkedIn · Launching 2026</p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-card rounded-xl p-6 md:p-8 shadow-soft border border-border/50">
