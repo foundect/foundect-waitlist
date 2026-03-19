@@ -1,11 +1,10 @@
-import { Brain, Gamepad2, Shield, Building2, Lock } from "lucide-react";
+import { ShieldCheck, FileText, Scale, Lock } from "lucide-react";
 
 const pillars = [
-  { icon: Brain, label: "AI-assisted discovery and insights" },
-  { icon: Gamepad2, label: "Gamified investing experience" },
-  { icon: Shield, label: "Shari'ah-aligned investment structures" },
-  { icon: Building2, label: "Institutional-ready platform architecture" },
-  { icon: Lock, label: "Trust-first design with compliance readiness" },
+  { icon: ShieldCheck, label: "Governance-first platform architecture" },
+  { icon: FileText, label: "Structured SME disclosure process" },
+  { icon: Scale, label: "Shari'ah-aligned investment structures" },
+  { icon: Lock, label: "Admin-reviewed campaigns only" },
 ];
 
 const AboutSection = () => {
@@ -15,11 +14,11 @@ const AboutSection = () => {
         <div className="text-center mb-8">
           <h2 className="text-xl md:text-2xl font-bold mb-4">What is Foundect?</h2>
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-            Foundect is Bangladesh's first next-generation ethical investment platform designed to bridge Shari'ah-compliant investors with real, growth-oriented businesses. The platform leverages AI-driven insights, gamified participation models, and structured onboarding systems to make ethical investing more transparent, accessible, and engaging.
+            Foundect is a Shari'ah-compliant investment infrastructure platform. It does not hold funds, promise returns, or act as a financial intermediary. Instead, it provides the governance layer — verification, structured disclosure, and accountability — that allows investors and businesses to interact with clarity and trust.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8">
           {pillars.map((pillar, index) => (
             <div 
               key={index}

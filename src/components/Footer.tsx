@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <p className="text-sm font-semibold text-foreground mb-1">Foundect</p>
-            <p className="text-xs text-muted-foreground">Ethical investing, reimagined.</p>
+            <p className="text-xs text-muted-foreground">Investment infrastructure. Built for trust.</p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-sm text-muted-foreground">

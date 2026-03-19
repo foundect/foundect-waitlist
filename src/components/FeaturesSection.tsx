@@ -1,11 +1,10 @@
-import { Sparkles, Trophy, FileCheck, Briefcase, Layers } from "lucide-react";
+import { Building2, Eye, ClipboardList, Layers } from "lucide-react";
 
 const features = [
-  { icon: Sparkles, title: "AI-powered opportunity discovery" },
-  { icon: Trophy, title: "Gamified investor engagement system" },
-  { icon: FileCheck, title: "Transparent, non-interest-based investment models" },
-  { icon: Briefcase, title: "Business-focused fundraising tools" },
-  { icon: Layers, title: "Scalable architecture for institutional partnerships" },
+  { icon: Building2, title: "Verified business onboarding" },
+  { icon: Eye, title: "Investor-facing transparency controls" },
+  { icon: ClipboardList, title: "Documented capital participation" },
+  { icon: Layers, title: "Scalable infrastructure for institutional use" },
 ];
 
 const FeaturesSection = () => {
