@@ -37,9 +37,9 @@ const WaitlistForm = () => {
       return;
     }
 
-    // Phone number validation - E.164 format
+    // Phone number validation - must be digits only (with optional leading +), at least 7 digits
     const cleanPhone = formData.phone.replace(/[\s\-()]/g, '');
-    const phoneRegex = /^\+?[1-9]\d{6,14}$/;
+    const phoneRegex = /^\+?\d{7,15}$/;
     if (!phoneRegex.test(cleanPhone)) {
       toast.error("Please enter a valid phone number");
       return;
@@ -55,8 +55,6 @@ const WaitlistForm = () => {
           email: formData.email.toLowerCase().trim(),
           phone_number: formData.phone.trim().replace(/[^+0-9]/g, ''),
           user_type: formData.userType as 'investor' | 'business',
-          user_agent: navigator.userAgent,
-          referrer_url: document.referrer || null,
         });
 
       if (error) {
