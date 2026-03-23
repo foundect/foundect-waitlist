@@ -54,7 +54,7 @@ const WaitlistForm = () => {
           full_name: formData.fullName.trim(),
           email: formData.email.toLowerCase().trim(),
           phone_number: formData.phone.trim().replace(/[^0-9+]/g, ''),
-          user_type: formData.userType === 'investor' ? 'Investor' : 'Business',
+          user_type: formData.userType as 'investor' | 'business',
         });
 
       if (error) {
