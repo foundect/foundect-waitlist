@@ -48,16 +48,16 @@ const WaitlistForm = () => {
     setIsLoading(true);
 
     try {
+      const insertData = {
+        full_name: formData.fullName.trim(),
+        email: formData.email.toLowerCase().trim(),
+        phone_number: formData.phone.trim().replace(/[^+0-9]/g, ''),
+        user_type: formData.userType as 'investor' | 'business',
+      };
+
       const { error } = await supabase
         .from('early_access_waitlist')
-        .insert({
-          full_name: formData.fullName.trim(),
-          email: formData.email.toLowerCase().trim(),
-          phone_number: formData.phone.trim().replace(/[^+0-9]/g, ''),
-          user_type: formData.userType as 'investor' | 'business',
-          user_agent: navigator.userAgent,
-          referrer_url: document.referrer || null,
-        });
+        .insert(insertData);
 
       if (error) {
         // Check for duplicate email error
